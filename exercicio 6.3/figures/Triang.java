@@ -6,12 +6,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
 
 public class Triang extends Figure{
-	private int x;
-	private int y;
-	private int w;
-	private int h;
-	private Color fundo;
-	private Color contorno;
+
 	
  public Triang(int x,int y,int w,int h,Color fundo,Color contorno){
  		this.x=x;
