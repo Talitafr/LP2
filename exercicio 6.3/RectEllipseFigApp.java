@@ -81,12 +81,11 @@ class ListFrame extends JFrame {
                  case 'c' :{
                         int x = rand.nextInt(350);
                         int y = rand.nextInt(350);
-                        int basemenor = rand.nextInt(75) + 15;
-                        int basemaior = rand.nextInt(100) + basemenor; 
+                        int w = rand.nextInt(100); 
                         int h = rand.nextInt(50);
                         Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
                         Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Trapezio c = new Trapezio(x,y, basemaior,basemenor,h,fundo,contorno);                       
+                        Trapezio c = new Trapezio(x,y, w ,h,fundo,contorno);                       
                         figs.add(c);
                         c.print();
                         repaint();  // outer.repaint()
