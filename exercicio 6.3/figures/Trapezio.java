@@ -17,7 +17,7 @@ public class Trapezio extends Figure{
   		this.h=h;
   		this.fundo=fundo;
   		this.contorno=contorno;
-    basemenor = ((this.w)/2);
+    		basemenor = ((this.w)/2);
 }
 	public void print() {
         System.out.format("Trapézio de tamanho (%d, base maior; %d, base menor;%d, altura) na posicao (%d,%d)\n",
