@@ -16,7 +16,7 @@ public class Trapezio extends Figure{
   		this.h=h;
   		this.fundo=fundo;
   		this.contorno=contorno;
-    		basemenor = ((this.w)/2);
+    basemenor = ((this.w)/2);
 }
 	public void print() {
         System.out.format("Trapézio de tamanho (%d, base maior; %d, base menor;%d, altura) na posicao (%d,%d)\n",
@@ -25,7 +25,7 @@ public class Trapezio extends Figure{
 	
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		int[] xdir= {this.x,this.x,(this.w)+(this.x), (this.basemenor)+ (this.x)};
+		int[] xdir= {this.x,this.x,(this.w)+(this.x), (basemenor)+ (this.x)};
 		int[] ydir={this.y,(this.h) + (this.y),(this.h) + (this.y),this.y};
 		g2.drawPolygon(xdir, ydir, 4);
 		g2.setColor(this.fundo);
