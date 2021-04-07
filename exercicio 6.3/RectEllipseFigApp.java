@@ -37,61 +37,61 @@ class ListFrame extends JFrame {
 
         this.addKeyListener (
             new KeyAdapter() {
-                public void keyPressed (KeyEvent evt) {
-                	switch (evt.getKeyChar()) {
-					              case 'e': {
-						                  int x = rand.nextInt(350);
-                        int y = rand.nextInt(350);
-                        int w = rand.nextInt(50);
-                        int h = rand.nextInt(50);
-                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Ellipse e = new Ellipse(x,y, w,h,fundo,contorno);                        
-                        figs.add(e);
-                        e.print();
-                        repaint();  // outer.repaint()
-                        break;
-					                   }
-					             case 'r':{
-						                  int x = rand.nextInt(350);
-                        int y = rand.nextInt(350);
-                        int w = rand.nextInt(50);
-                        int h = rand.nextInt(50);
-                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Rect r = new Rect(x,y, w,h,fundo,contorno);                       
-                        figs.add(r);
-                        r.print();
-                        repaint();  // outer.repaint()
-                        break;
-					                   }
-                  case 't':{
-                        int x = rand.nextInt(350);
-                        int y = rand.nextInt(350);
-                        int h = rand.nextInt(50);
-                        int w = rand.nextInt(55) + 15;
-                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Triang t = new Triang(x,y, w,h,fundo,contorno);                         
-                        figs.add(t);
-                        t.print();
-                        repaint();  // outer.repaint()
-                        break;
-                        }
-                 case 'c' :{
-                        int x = rand.nextInt(350);
-                        int y = rand.nextInt(350);
-                        int w = rand.nextInt(100); 
-                        int h = rand.nextInt(50);
-                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
-                        Trapezio c = new Trapezio(x,y, w ,h,fundo,contorno);                       
-                        figs.add(c);
-                        c.print();
-                        repaint();  // outer.repaint()
-                        break;      
-                 }
-					         }
+              public void keyPressed (KeyEvent evt) {
+                switch (evt.getKeyChar()) {
+			case 'e': {
+				int x = rand.nextInt(350);
+				int y = rand.nextInt(350);
+				int w = rand.nextInt(50);
+				int h = rand.nextInt(50);
+				Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Ellipse e = new Ellipse(x,y, w,h,fundo,contorno);                        
+				figs.add(e);
+				e.print();
+				repaint();  // outer.repaint()
+				break;
+				}
+			case 'r':{
+				int x = rand.nextInt(350);
+				int y = rand.nextInt(350);
+				int w = rand.nextInt(50);
+				int h = rand.nextInt(50);
+				Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Rect r = new Rect(x,y, w,h,fundo,contorno);                       
+				figs.add(r);
+				r.print();
+				repaint();  // outer.repaint()
+				break;
+		                }
+                  	case 't':{
+				int x = rand.nextInt(350);
+				int y = rand.nextInt(350);
+				int h = rand.nextInt(50);
+				int w = rand.nextInt(55) + 15;
+				Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Triang t = new Triang(x,y, w,h,fundo,contorno);                         
+				figs.add(t);
+				t.print();
+				repaint();  // outer.repaint()
+				break;
+				}
+                 	case 'c' :{
+				int x = rand.nextInt(350);
+				int y = rand.nextInt(350);
+				int w = rand.nextInt(100); 
+				int h = rand.nextInt(50);
+				Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),rand.nextInt(256));
+				Trapezio c = new Trapezio(x,y, w ,h,fundo,contorno);                       
+				figs.add(c);
+				c.print();
+				repaint();  // outer.repaint()
+				break;      
+			 }
+	         }
            }
          }
       );
