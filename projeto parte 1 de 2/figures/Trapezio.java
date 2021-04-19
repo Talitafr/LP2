@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
 
 public class Trapezio extends Figure{
-
+   // public boolean selected;
   protected int basemenor;
 
  	public Trapezio(int x,int y,int w,int h,Color fundo,Color contorno){
@@ -17,8 +17,9 @@ public class Trapezio extends Figure{
   		this.h=h;
   		this.fundo=fundo;
   		this.contorno=contorno;
-    basemenor = ((this.w)/2);
-}
+                basemenor = ((this.w)/2);
+                this.selected = false;
+        }
 	public void print() {
         System.out.format("Trapézio de tamanho (%d, base maior; %d, base menor;%d, altura) na posicao (%d,%d)\n",
             this.w,basemenor, this.h, this.x, this.y);
@@ -36,10 +37,20 @@ public class Trapezio extends Figure{
 	}
   
    public void foculisedobj(Graphics g){
-         Graphics2D gdd = (Graphics2D) g;          
-         int[] xdir= {(this.x) -10 ,(this.x) -10,((this.w)+(this.x))+10, (basemenor + (this.x))+10};
-		       int[] ydir={(this.y) -10 ,((this.h) + (this.y))+10,((this.h) + (this.y))+10,(this.y) -10};
-         gdd.setColor(Color.black);
-         gdd.drawPolygon(xdir, ydir, 4);
+         Graphics2D gdd = (Graphics2D) g;
+        gdd.setColor(Color.black);
+        gdd.drawRect((this.x),(this.y), (this.w),(this.h));
          }
+   
+   
+    @Override
+    public void drag(int dx, int dy){
+     this.x = (this.x) + dx;
+     this.y = (this.y) + dy;
+  } 
+
+     @Override
+   public boolean setselected(boolean status){
+        return this.selected = status;
+    }
 }

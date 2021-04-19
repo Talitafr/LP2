@@ -15,6 +15,7 @@ public class Triang extends Figure{
 	 	this.h=h;
 	 	this.fundo=fundo;
 	 	this.contorno=contorno;
+                this.selected = false;
    
 }
 	public void print() {
@@ -34,10 +35,19 @@ public class Triang extends Figure{
 	}
   public void foculisedobj(Graphics g){
      Graphics2D gdd = (Graphics2D) g;
-     int[] xdir= {(this.x)-10,(((this.w)/2) + (this.x)) +10, ((this.w) + (this.x))+10};
-     int[] ydir={(this.y) +10, ((this.y) - (this.h)) -10,(this.y)+10};
-     gdd.setColor(Color.black);
-     gdd.drawPolygon(xdir, ydir, 3);
+        gdd.setColor(Color.black);
+        gdd.drawRect( this.x , (this.y) - (this.h) , (this.w),(this.h));
+    }
+
+    @Override
+    public boolean setselected(boolean status) {
+        return this.selected = status;
+    }
+
+    @Override
+    public void drag(int dx, int dy) {
+        this.x = (this.x) + dx;
+        this.y = (this.y) + dy;
     }
 
 

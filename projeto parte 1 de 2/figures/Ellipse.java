@@ -7,6 +7,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
 
 public class Ellipse extends Figure{
+   // public boolean selected;
 
     public Ellipse (int x, int y, int w, int h, Color fundo,Color contorno) {
         this.x = x;
@@ -15,6 +16,7 @@ public class Ellipse extends Figure{
         this.h = h;
         this.fundo = fundo;
         this.contorno = contorno;
+        this.selected = false;
     }
 
     public void print() {
@@ -30,10 +32,22 @@ public class Ellipse extends Figure{
         g2d.setColor(this.contorno);
         g2d.drawOval(this.x,this.y, this.w,this.h);
     }   
+    @Override
     public void foculisedobj(Graphics g){
-        Graphics2D gdd = (Graphics2D) g;
+      Graphics2D gdd = (Graphics2D) g;
         gdd.setColor(Color.black);
-        gdd.drawOval((this.x) -10,(this.y)-10, (this.w)+10,(this.h)+10);
-        
+        gdd.drawRect((this.x),(this.y), (this.w),(this.h));
      }
+ 
+    @Override
+    public boolean setselected(boolean status){
+        return this.selected = status;
+    }
+    
+    @Override
+    public void drag(int dx, int dy){
+     this.x = (this.x) + dx;
+     this.y = (this.y) + dy;
+  } 
+
 }
