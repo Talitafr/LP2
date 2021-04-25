@@ -181,7 +181,7 @@ class ListFrame extends JFrame {
                             for(Figure fig: figs) {                               
                                if(fig.selected==true){ 
                                 fig.setselected(false);
-                                if(figs.size()>=1){
+                                if(figs.size()>=2){
                                     figs.get(rand.nextInt(figs.size()-1)).setselected(true);
                                     
                                     }
@@ -239,7 +239,7 @@ class ListFrame extends JFrame {
                         
                         
                         fig.setselected(false);
-                       // System.out.println(fig.selected);
+                       
                         repaint();
                     }
                     repaint();
@@ -268,7 +268,7 @@ class ListFrame extends JFrame {
               });
         this.addMouseListener(new MouseAdapter() {
             public void mouseReleased (MouseEvent evt){
-                //System.out.println(fig.selected);
+                
                 
                   for(Figure fig: figs) {
                         
@@ -291,12 +291,10 @@ class ListFrame extends JFrame {
               if(fig.deleter==true){
                    fig.deleter = false;
                    deletado= fig;
-                   //repaint();
+                   
                 } 
               else{
-               //int c = figs.indexOf(fig);
-               //fig.paint(g);
-               //fig.foculisedobj(g);
+             
                c = figs.indexOf(fig);
               }               
             }
@@ -306,6 +304,7 @@ class ListFrame extends JFrame {
         }
             
          figs.remove(deletado);
+         
          if(c>=0){
              int z = ((int)figs.size()-1);
              Figure temp;
