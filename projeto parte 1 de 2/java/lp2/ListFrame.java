@@ -124,6 +124,19 @@ class ListFrame extends JFrame {
                                  
                                  break;
                                  }
+
+                                    case 'l':{
+                                     for(Figure fig: figs) {
+                                         if(fig.selected==true){
+                                             JColorChooser colorChooser = new JColorChooser();
+                                            fig.contorno = JColorChooser.showDialog(null, "escolha uma cor ", Color.blue);
+                                            repaint();
+                                         }
+                                     
+                                     }
+                                 
+                                 break;
+                                 }
                                  
                                  case VK_DELETE :{
                                      for(Figure fig: figs) {
@@ -219,7 +232,7 @@ class ListFrame extends JFrame {
         
         this.addMouseListener(new MouseAdapter() {
              public void mouseClicked (MouseEvent evt){
-            	x= evt.getX();
+               	x= evt.getX();
                 y= evt.getY();	 
             	for(Figure fig: figs) {
                     if((x >= fig.x) && (x<=((fig.x)+(fig.w))) && ((y>= fig.y) && (y<=(fig.y) + (fig.w)))){ 
