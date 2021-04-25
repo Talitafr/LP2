@@ -125,7 +125,7 @@ class ListFrame extends JFrame {
                                  break;
                                  }
 
-                                    case 'l':{
+                                    case 'l':{// L minusculo
                                      for(Figure fig: figs) {
                                          if(fig.selected==true){
                                              JColorChooser colorChooser = new JColorChooser();
