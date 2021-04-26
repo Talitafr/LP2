@@ -33,7 +33,7 @@ public class Triang extends Figure{
 	}
 
         @Override
-        public void setSize(int dx, int dy) {
+        public void settSize(int dx, int dy) {
         this.w = dx;
         this.h = dy;
     }

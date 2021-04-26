@@ -33,7 +33,7 @@ public class Trapezio extends Figure{
 		       g2.drawPolygon(xdir, ydir, 4);
 	}
 
-        public void setSize(int dx, int dy) {
+        public void settSize(int dx, int dy) {
         this.w = dx;
         this.h = dy;
         basemenor = (this.w)/2;

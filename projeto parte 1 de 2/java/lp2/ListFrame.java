@@ -207,7 +207,7 @@ class ListFrame extends JFrame {
                         case (KeyEvent.VK_ADD):{
                             for(Figure fig: figs) {                               
                                if(fig.selected==true){ 
-                                   fig.setSize(fig.w + 10, fig.h + 10);
+                                   fig.settSize(fig.w + 10, fig.h + 10);
                                    repaint();
                                }
                             }
@@ -216,7 +216,7 @@ class ListFrame extends JFrame {
                         case (KeyEvent.VK_MINUS):{
                             for(Figure fig: figs) {                               
                                if(fig.selected==true){ 
-                                   fig.setSize(fig.w - 10, fig.h - 10);
+                                   fig.settSize(fig.w - 10, fig.h - 10);
                                    repaint();
                                }
                             }

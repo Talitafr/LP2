@@ -21,7 +21,7 @@ public abstract class Figure{
        
        public abstract void paint(Graphics g);
        public abstract void print();
-       public abstract void setSize(int dx, int dy);
+       public abstract void settSize(int dx, int dy);
 
     public void setselected(boolean status) {
          this.selected = status;
