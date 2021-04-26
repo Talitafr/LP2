@@ -4,7 +4,8 @@
 *Tecla e - Gera uma nova elipse aleatória;
 *Tecla c - Gera um trapézio aleatório;
 *Tecla t - Gera um triângulo aleatório.
-*Tecla m - Quando a figura ta selecionada, abre a palheta de cores pra você mudar a cor
+*Tecla m - Quando a figura ta selecionada, abre a palheta de cores pra você mudar a cor de fundo
+*Tecla l (L minúsculo) - Quando a figura ta selecionada, abre a palheta de cores pra você mudar a cor de contorno
 *Tecla Delete - Deleta a figura selecionada
 *Tecla + do Numpad - Aumenta a dimensão da figura selecionada
 *Tecla - do teclado principal - Diminui a dimensão da figura selecionada
