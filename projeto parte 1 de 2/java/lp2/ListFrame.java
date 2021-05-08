@@ -26,18 +26,23 @@ import figures.*;
 import static java.awt.event.KeyEvent.*;
 
 
+
  
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
     Figure foco = null;
+    int hs=-1;
     int x,y = 0;
-    public boolean selected;
-    int px;
-    int py;
+    int px=0;
+    int py=0;
+    Point mp=new Point(0,0);
     
+    Point mouse = new Point(0,0);
+    ArrayList<Rect> auxp = new ArrayList<Rect>();
+    
+
     ListFrame () {
-        
         
         this.addWindowListener (
             new WindowAdapter() {
@@ -72,6 +77,7 @@ class ListFrame extends JFrame {
 		                        repaint();  // outer.repaint()
 		                        break;
                                         }
+                            
                             case 'r':{
 					int x = px;
 		                        int y = py;
@@ -85,7 +91,8 @@ class ListFrame extends JFrame {
 		                        repaint();  // outer.repaint()                                        
 		                        break;
                                     }
-		                  case 't':{
+                            
+		            case 't':{
 		                        int x = px;
 		                        int y = py;
 		                        int h = rand.nextInt(50);
@@ -98,7 +105,8 @@ class ListFrame extends JFrame {
 		                        repaint();  // outer.repaint()
 		                        break;
 		                        }
-		                 case 'c' :{
+                                  
+		            case 'c' :{
 		                        int x = px;
 		                        int y = py;
 		                        int w = rand.nextInt(100);
@@ -113,220 +121,204 @@ class ListFrame extends JFrame {
                                     
 		                 }
                                  
-                                 case 'm':{
-                                     for(Figure fig: figs) {
-                                         if(fig.selected==true){
-                                             JColorChooser colorChooser = new JColorChooser();
-                                            fig.fundo = JColorChooser.showDialog(null, "Escolha uma cor para o fundo da figura", Color.black);
-                                            repaint();
-                                         }
+                            case 'm':{
                                      
-                                     }
-                                 
-                                 break;
+                                        if(foco!=null){
+                                             JColorChooser colorChooser = new JColorChooser();
+                                            foco.fundo = JColorChooser.showDialog(null, "Escolha uma cor para o fundo da figura", Color.black);
+                                            repaint();
+                                        }
+                                        break;
                                  }
 
-                                    case 'l':{
-                                     for(Figure fig: figs) {
-                                         if(fig.selected==true){
+                            case 'l':{
+                                     
+                                        if(foco!=null){
                                              JColorChooser colorChooser = new JColorChooser();
-                                            fig.contorno = JColorChooser.showDialog(null, "Escolha uma cor para o contorno da figura ", Color.black);
+                                            foco.contorno = JColorChooser.showDialog(null, "Escolha uma cor para o contorno da figura ", Color.black);
                                             repaint();
-                                         }
-                                     
-                                     }
+                                        }
+
+                                        break;
+                                }
                                  
-                                 break;
-                                 }
-                                 
-                                 case VK_DELETE :{
-                                     for(Figure fig: figs) {
-                                         if(fig.selected==true){
-                                            fig.deleter= true;
-                                         repaint();
-                                         }
-                                     
-                                     }
-                                     break;
+                            case VK_DELETE :{
+                                         if(foco!=null){
+                                            figs.remove(foco);
+                                            foco=null;
+                                            repaint();
+                                        }
+                                                                          
+                                        break;
                                  }                                 
-				}
+			}
                 }    
                 public void keyPressed (KeyEvent evt){
                     switch(evt.getKeyCode()){                        
                       
                         case 37:{//LEFT
-                                for(Figure fig: figs) {
-                                         if(fig.selected==true){
-                                         fig.drag( -10,0);
-                                         repaint();                                                                                  
-                                         }
-                                     }     
-                                     break;
+                            
+                            if(foco!=null){
+                                foco.drag( -10,0);
+                                repaint();                                                                                  
+                                }
+                                          
+                            break;
                         }
                     
                         case 38 :{//UP
-                            for(Figure fig: figs) {
-                                         if(fig.selected==true){
-                                            fig.drag(0,-10);
-                                            repaint();                                                                                                                   
-                                         }
-                                     }    
-                                    break;                       
+                            
+                            if(foco!=null){
+                                foco.drag(0,-10);
+                                repaint();                                                                                                                   
+                            }
+                                         
+                            break;                       
                         }
                         case 39:{ //RIGHT
-                            for(Figure fig: figs) {
-                                         if(fig.selected==true){
-                                            fig.drag(10,0);                                            
-                                            repaint();
-                                         }
-                                    }    
-                                    break;
+                            
+                            if(foco!=null){
+                                foco.drag(10,0);                                            
+                                repaint();
+                            }
+                                        
+                            break;
                         }
+                        
                         case 40:{//DOWN
-                            for(Figure fig: figs) {
-                                if(fig.selected==true){
-                                   fig.drag(0,+10);
+                            
+                                if(foco!=null){
+                                   foco.drag(0,+10);
                                    repaint();
                                  }
-                               }    
+                                   
                             break;                            
                         }
+                        
                         case KeyEvent.VK_TAB:{
-                            for(Figure fig: figs) {                               
-                               if(fig.selected==true){ 
-                                fig.setselected(false);
-                                if(figs.size()>=2){
-                                    figs.get(rand.nextInt(figs.size()-1)).setselected(true);
-                                    
-                                    }
+                                                                 
+                               if(foco!=null){ 
+                                    foco=figs.get(0);
+                                    repaint();
                                 }
-                               repaint();
-                            }
+                                                        
                             break;                      
-                        }                       
+                        }    
+                        
                         case (KeyEvent.VK_ADD):{
-                            for(Figure fig: figs) {                               
-                               if(fig.selected==true){ 
-                                   fig.settSize(fig.w + 10, fig.h + 10);
+                                                           
+                               if(foco!=null){ 
+                                   foco.settSize( + 10,  + 10,8);
                                    repaint();
                                }
-                            }
+                            
                             break;
-                            }                        
-                        case (KeyEvent.VK_MINUS):{
-                            for(Figure fig: figs) {                               
-                               if(fig.selected==true){ 
-                                   fig.settSize(fig.w - 10, fig.h - 10);
+                            }    
+                        
+                        case (KeyEvent.VK_SUBTRACT):{
+                                            
+                               if(foco!=null){ 
+                                   foco.settSize(- 10,  - 10,8);
                                    repaint();
                                }
-                            }
+                            
                             break;
                             
-                            }
-                        
-                        
-                    }
+                         }
                 
+                    }
                 }
-         }
+            }
       );
         
         this.addMouseListener(new MouseAdapter() {
              public void mouseClicked (MouseEvent evt){
                	x= evt.getX();
                 y= evt.getY();	 
-            	for(Figure fig: figs) {
-                    if((x >= fig.x) && (x<=((fig.x)+(fig.w))) && ((y>= fig.y) && (y<=(fig.y) + (fig.w)))){ 
-                        foco = fig;
-                        Figure temp;
-                        int c = figs.indexOf(fig);
-                        int z = ((int)figs.size()-1);
-                        temp = figs.get(z);
-                        figs.set(z, figs.get(c));
-                        figs.set(c, temp);                
-                        foco.setselected(true);
+            	for(int i = figs.size()-1;i>=0;i--) {
+                    if((x >= figs.get(i).x) && (x<=((figs.get(i).x)+(figs.get(i).w))) && ((y>= figs.get(i).y) && (y<=(figs.get(i).y) + (figs.get(i).h)))){ 
+                        foco = figs.get(i);
                         repaint();
-
+                        break;
                         }
+                    
                     else{
-                        
-                        
-                        
-                        fig.setselected(false);
-                       
+                        foco=null;
                         repaint();
                     }
-                    repaint();
             	 }
+             }
+             
+             public void mousePressed(MouseEvent evt){
+                               
+                 if(foco!=null){
+                        mp= evt.getPoint();
+                        for(Rect ao:auxp ){
+                            if((mp.x >= ao.x) && (mp.x<=((ao.x)+(ao.w))) && ((mp.y>= ao.y) && (mp.y<=(ao.y) + (ao.h)))){  
+                                hs=auxp.indexOf(ao);
+                                break;
+                            }
+                            
+                            else{
+                                hs=-1;
+                            }                          
+                        }
+                        if((!((mp.x >= foco.x) && (mp.x<=((foco.x)+(foco.w))) && ((mp.y>= foco.y) && (mp.y<=(foco.y) + (foco.h)))))&&(hs==-1)){
+                                foco=null;
+                                repaint();
+                        }
+                }
              }
         });
 
         this.addMouseMotionListener(new MouseMotionAdapter(){
               public void mouseDragged( MouseEvent evt){
-                  int xmd = evt.getX();
-                  int ymd = evt.getY();
-                
-                  for(Figure fig: figs) {
-                        if(fig.selected==true){
-                            fig.drag(xmd - fig.x , ymd - fig.y);
-                            repaint();    
-                        }
+                 
+                  mouse = evt.getPoint();
+                  
+                        if(foco!=null){
+
+                                if(hs!=-1){
+                                    
+                                    foco.settSize(mouse.x - mp.x, mouse.y - mp.y,hs);
+                                    mp=mouse;
+                                    repaint();  
+                                }
+                                else{
+                                    
+                                    foco.drag(mouse.x - mp.x , mouse.y - mp.y);
+                                    mp=mouse;
+                                    repaint();
+                                    
+                                }
                         
-                        else{
-                            
-                                fig.setselected(false); 
-                            }      
-                  }
+                    }
+                        
                   
                   }
               });
-        this.addMouseListener(new MouseAdapter() {
-            public void mouseReleased (MouseEvent evt){
-                
-                
-                  for(Figure fig: figs) {
-                        
-                            fig.setselected(false);              
-                        }
-            }
-        });
 
-        this.setTitle("Lista de Elipses");
+
+        this.setTitle("Projeto");
         this.setSize(350, 350);        
    }
 
      public void paint (Graphics g) {
         
-        Figure deletado = null;
-        int c = -1;
         super.paint(g);
         for (Figure fig: figs) {
-            if(fig.selected == true){
-              if(fig.deleter==true){
-                   fig.deleter = false;
-                   deletado= fig;
-                   
-                } 
-              else{
-             
-               c = figs.indexOf(fig);
-              }               
-            }
-            else{
-                fig.paint(g);                                
-            }
-        }
             
-         figs.remove(deletado);
-         
-         if(c>=0){
-             int z = ((int)figs.size()-1);
-             Figure temp;
-             temp = figs.get(z);
-             figs.set(z, figs.get(c));
-             figs.set(c, temp);           
-             figs.get(z).paint(g);
-             figs.get(z).foculisedobj(g);
-         }  
+                fig.paint(g);                                
+            
+        }
+        if(foco!=null){
+            figs.remove(foco);
+            figs.add(foco);
+            foco.paint(g);
+            auxp=foco.making_dots();
+            foco.foculisedobj(g,auxp);
+ 
+        }
+
     }
 }
