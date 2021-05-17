@@ -106,6 +106,12 @@ public class Rect extends Figure{
     }
     
     
+    public boolean clicked(int x, int y){
+        return (x >= this.x) && (x<=((this.x)+(this.w))) && ((y>= this.y) && (y<=(this.y) + (this.h)));
+    
+    }
+    
+    
      
 }
 

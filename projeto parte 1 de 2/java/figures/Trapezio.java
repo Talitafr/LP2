@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 public class Trapezio extends Figure{
- 
+    Polygon trapezio;
     public int basemenor;
 
  	public Trapezio(int x,int y,int w,int h,Color fundo,Color contorno){
@@ -25,11 +25,11 @@ public class Trapezio extends Figure{
 		Graphics2D g2 = (Graphics2D) g;
 		int[] xdir= {this.x,this.x,(this.w)+(this.x), basemenor + (this.x)};
 		int[] ydir={this.y,(this.h) + (this.y),(this.h) + (this.y),this.y};
-		g2.drawPolygon(xdir, ydir, 4);
+                trapezio = new Polygon(xdir,ydir,4);
 		g2.setColor(this.fundo);
-		g2.fillPolygon(xdir, ydir, 4);
+		g2.fillPolygon(trapezio);
 		g2.setColor(this.contorno);
-		g2.drawPolygon(xdir, ydir, 4);
+		g2.drawPolygon(trapezio);
 	}
 
         public void settSize(int dx, int dy, int hs) {
@@ -107,6 +107,10 @@ public class Trapezio extends Figure{
 
             basemenor = (this.w)/2;
             
+    }
+    
+    public boolean clicked (int x, int y){
+        return trapezio.contains(x, y);
     }
         
 }

@@ -1,9 +1,11 @@
 package figures;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import static java.lang.Math.*;
 
 
 public class Ellipse extends Figure{
-   
+   Ellipse2D Elipse;
 
     public Ellipse (int x, int y, int w, int h, Color fundo,Color contorno) {
         this.x = x;
@@ -24,11 +26,12 @@ public class Ellipse extends Figure{
     @Override
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawOval(this.x,this.y, this.w,this.h);
+        Elipse = new Ellipse2D.Double(this.x,this.y, this.w,this.h);
         g2d.setColor(this.fundo);
-        g2d.fillOval(this.x,this.y, this.w,this.h);
+        g2d.fill(Elipse);
         g2d.setColor(this.contorno);
-        g2d.drawOval(this.x,this.y, this.w,this.h);
+        g2d.draw(Elipse);
+        
     }   
     
     @Override
@@ -105,6 +108,9 @@ switch(hs){
             }
         }
     }
+     public boolean clicked(int x, int y){            
+            return Elipse.contains(x, y);
+     }
     
 
 }

@@ -1,10 +1,11 @@
 package figures;
+import ivisible.Ivisivel;
 import java.awt.*;
 import java.util.ArrayList;
 
 
 
-public abstract class Figure{
+public abstract class Figure implements Ivisivel{
         public int x;
       	public int y;
       	public int w;
@@ -17,7 +18,7 @@ public abstract class Figure{
         
         
        
-       public abstract void paint(Graphics g);
+//       public abstract void paint(Graphics g);
        public abstract void print();
        public abstract void settSize(int dx, int dy,int hs);
 

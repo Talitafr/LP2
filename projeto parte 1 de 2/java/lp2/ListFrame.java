@@ -236,7 +236,7 @@ class ListFrame extends JFrame {
                	x= evt.getX();
                 y= evt.getY();	 
             	for(int i = figs.size()-1;i>=0;i--) {
-                    if((x >= figs.get(i).x) && (x<=((figs.get(i).x)+(figs.get(i).w))) && ((y>= figs.get(i).y) && (y<=(figs.get(i).y) + (figs.get(i).h)))){ 
+                    if(figs.get(i).clicked(x, y)){ 
                         foco = figs.get(i);
                         repaint();
                         break;

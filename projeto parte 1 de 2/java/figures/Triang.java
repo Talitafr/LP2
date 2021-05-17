@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Triang extends Figure{
 
-	
+    Polygon triangulo;
  public Triang(int x,int y,int w,int h,Color fundo,Color contorno){
  		this.x=x;
  		this.y=y;
@@ -22,13 +22,16 @@ public class Triang extends Figure{
         @Override
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+                
+                
 		int[] xdir= {((this.w)/2) + (this.x),this.x,(this.w) + (this.x)};
 		int[] ydir={ (this.y),(this.y)+(this.h),(this.y)+(this.h)};
-		g2.drawPolygon(xdir, ydir, 3); 
+                triangulo = new Polygon(xdir,ydir,3);
 		g2.setColor(fundo);
 		g2.fillPolygon(xdir, ydir, 3);
+                g2.fillPolygon(triangulo);
 		g2.setColor(contorno);
-		g2.drawPolygon(xdir, ydir, 3);
+                g2.drawPolygon(triangulo);
 	}
 
         @Override
@@ -104,6 +107,10 @@ public class Triang extends Figure{
                 this.w=5;
             }
         }
+    }
+        
+        public boolean clicked(int x, int y){
+            return triangulo.contains(x, y);
     }
         
 }
