@@ -10,15 +10,10 @@ public abstract class Figure implements Ivisivel{
       	public int y;
       	public int w;
       	public int h;
-        public int dx;
-        public int dy;
         public Color fundo;
         public Color contorno;
 
-        
-        
-       
-//       public abstract void paint(Graphics g);
+
        public abstract void print();
        public abstract void settSize(int dx, int dy,int hs);
 

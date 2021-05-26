@@ -3,8 +3,8 @@ import java.awt.*;
 
 
 public class Trapezio extends Figure{
-    Polygon trapezio;
-    public int basemenor;
+    protected Polygon trapezio;
+    protected int basemenor;
 
  	public Trapezio(int x,int y,int w,int h,Color fundo,Color contorno){
   		this.x=x;
