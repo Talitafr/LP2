@@ -5,7 +5,7 @@ import static java.lang.Math.*;
 
 
 public class Ellipse extends Figure{
-   protected Ellipse2D Elipse;
+   private Ellipse2D Elipse;
 
     public Ellipse (int x, int y, int w, int h, Color fundo,Color contorno) {
         this.x = x;

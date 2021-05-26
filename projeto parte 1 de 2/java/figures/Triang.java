@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Triang extends Figure{
 
-    protected Polygon triangulo;
+    private Polygon triangulo;
  public Triang(int x,int y,int w,int h,Color fundo,Color contorno){
  		this.x=x;
  		this.y=y;
