@@ -24,13 +24,18 @@ public class Ellipse extends Figure{
     }
 
     @Override
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
         Elipse = new Ellipse2D.Double(this.x,this.y, this.w,this.h);
         g2d.setColor(this.fundo);
         g2d.fill(Elipse);
         g2d.setColor(this.contorno);
         g2d.draw(Elipse);
+        if(focused==true){
+            auxp=this.making_dots();
+            this.foculisedobj(g2d, auxp);
+                    
+        }
         
     }   
     

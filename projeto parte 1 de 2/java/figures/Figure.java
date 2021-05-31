@@ -2,10 +2,11 @@ package figures;
 import ivisible.Ivisivel;
 import java.awt.*;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 
 
-public abstract class Figure implements Ivisivel{
+public abstract class Figure implements Ivisivel,Serializable{
         public int x;
       	public int y;
       	public int w;
@@ -17,7 +18,7 @@ public abstract class Figure implements Ivisivel{
        public abstract void print();
        public abstract void settSize(int dx, int dy,int hs);
 
-
+    protected ArrayList<Rect> auxp = new ArrayList<Rect>();
 
     public void drag(int dx, int dy) {
         this.x = this.x + dx;
@@ -61,4 +62,20 @@ public abstract class Figure implements Ivisivel{
             gdd.fillRect(ponto.x, ponto.y, ponto.w, ponto.h);
          }
     }
+    
+    public int handlerizar( Point mp){
+        int hs= -1;
+        for(Rect ao:auxp ){
+            if((mp.x >= ao.x) && (mp.x<=((ao.x)+(ao.w))) && ((mp.y>= ao.y) && (mp.y<=(ao.y) + (ao.h)))){  
+                hs=auxp.indexOf(ao);
+                break;
+            }
+                           
+            else{
+                hs=-1;
+            }                          
+        }
+        return hs;
+    }
+    
 }

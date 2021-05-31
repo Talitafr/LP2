@@ -20,13 +20,18 @@ public class Rect extends Figure{
     }
 
     @Override
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focused) {
         g.drawRect(this.x,this.y, this.w,this.h);
         g.setColor(this.fundo);
         g.fillRect(this.x,this.y, this.w,this.h);
           
         g.setColor(this.contorno);
         g.drawRect(this.x, this.y, this.w, this.h);
+        if(focused==true){
+            auxp=this.making_dots();
+            this.foculisedobj(g, auxp);
+                    
+        }
         
     }
     
@@ -107,7 +112,7 @@ public class Rect extends Figure{
     
     
     public boolean clicked(int x, int y){
-        return (x >= this.x) && (x<=((this.x)+(this.w))) && ((y>= this.y) && (y<=(this.y) + (this.h)));
+        return (x >= this.x) && (x<=((this.x)+(this.w))) && (y>= this.y) && (y<=(this.y) + (this.h));
     
     }
     

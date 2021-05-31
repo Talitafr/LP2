@@ -24,37 +24,70 @@ import java.util.ArrayList;
 import java.util.Random;
 import figures.*;
 import static java.awt.event.KeyEvent.*;
+import java.io.*;
 
 
 
  
 class ListFrame extends JFrame {
+    
     ArrayList<Figure> figs = new ArrayList<Figure>();
+    ArrayList<Button> buts = new ArrayList<Button>();
+    Button focus_but = null;
     Random rand = new Random();
     Figure foco = null;
     int hs=-1;
     int x,y = 0;
-    int px=0;
-    int py=0;
-    Point mp=new Point(0,0);
-    
+    Point p = new Point(0,0);
+    public Point mp=new Point(0,0);
+    Button botao;
     Point mouse = new Point(0,0);
-    ArrayList<Rect> auxp = new ArrayList<Rect>();
+ 
     
 
     ListFrame () {
+        try{
+           FileInputStream f = new FileInputStream("proj.bin");
+           ObjectInputStream o = new ObjectInputStream(f);
+           this.figs = (ArrayList<Figure>) o.readObject();
+           o.close();
+        
+        }
+        catch(Exception x){
+            System.out.println("ERRO!");
+        }
+        
+        Button botaoret = new Button(1,new Rect(40,60,25,25, Color.black,Color.black));
+        buts.add(botaoret);
+        Button botaoel = new Button(2,new Ellipse(40,110,25,25, Color.black,Color.black));
+        buts.add(botaoel);
+        Button botaotri = new Button(3,new Triang(40,160,25,25, Color.black,Color.black));
+        buts.add(botaotri);
+        Button botaotra = new Button(4,new Trapezio(40,220,25,25, Color.black,Color.black));
+        buts.add(botaotra);
+        
         
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
+                    try{
+                        FileOutputStream f = new FileOutputStream("proj.bin");
+                        ObjectOutputStream o = new ObjectOutputStream(f);
+                        o.writeObject(figs);
+                        o.flush();
+                        o.close();
+                    }
+                    catch(Exception x){
+                    }
+                    
                     System.exit(0);
                 }
             }
         );
         this.addMouseMotionListener(new MouseAdapter() {
             public void mouseMoved(MouseEvent evt){
-                px = evt.getX();
-                py = evt.getY();
+               p=evt.getPoint();
+               
             }
         });
                  
@@ -65,8 +98,8 @@ class ListFrame extends JFrame {
                         
                 	switch (evt.getKeyChar()) {
                             case 'e': {
-                                	int x = px;
-		                        int y = py;
+                                	int x = p.x;
+		                        int y = p.y;
 		                        int w = rand.nextInt(50);
 		                        int h = rand.nextInt(50);
 		                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256), 255 );
@@ -79,8 +112,8 @@ class ListFrame extends JFrame {
                                         }
                             
                             case 'r':{
-					int x = px;
-		                        int y = py;
+					int x = p.x;
+		                        int y = p.y;
 		                        int w = rand.nextInt(50);
 		                        int h = rand.nextInt(50);
 		                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
@@ -93,8 +126,8 @@ class ListFrame extends JFrame {
                                     }
                             
 		            case 't':{
-		                        int x = px;
-		                        int y = py;
+		                        int x = p.x;
+		                        int y = p.y;
 		                        int h = rand.nextInt(50);
 		                        int w = rand.nextInt(55) + 15;
 		                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
@@ -107,8 +140,8 @@ class ListFrame extends JFrame {
 		                        }
                                   
 		            case 'c' :{
-		                        int x = px;
-		                        int y = py;
+		                        int x = p.x;
+		                        int y = p.y;
 		                        int w = rand.nextInt(100);
 		                        int h = rand.nextInt(50);
 		                        Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
@@ -234,13 +267,27 @@ class ListFrame extends JFrame {
         this.addMouseListener(new MouseAdapter() {
              public void mouseClicked (MouseEvent evt){
                	x= evt.getX();
-                y= evt.getY();	 
+                y= evt.getY();
+                for(Button but:buts){
+                    if(but.clicked(x, y)){
+                        focus_but= but;
+                        repaint();
+                        break;
+                    }
+                    else{
+                        
+                        focus_but=null;                       
+                        repaint();
+                    }
+                    
+                }
             	for(int i = figs.size()-1;i>=0;i--) {
                     if(figs.get(i).clicked(x, y)){ 
                         foco = figs.get(i);
                         repaint();
                         break;
                         }
+                    
                     
                     else{
                         foco=null;
@@ -253,16 +300,8 @@ class ListFrame extends JFrame {
                                
                  if(foco!=null){
                         mp= evt.getPoint();
-                        for(Rect ao:auxp ){
-                            if((mp.x >= ao.x) && (mp.x<=((ao.x)+(ao.w))) && ((mp.y>= ao.y) && (mp.y<=(ao.y) + (ao.h)))){  
-                                hs=auxp.indexOf(ao);
-                                break;
-                            }
-                            
-                            else{
-                                hs=-1;
-                            }                          
-                        }
+                        hs=foco.handlerizar(mp);
+                        
                         if((!((mp.x >= foco.x) && (mp.x<=((foco.x)+(foco.w))) && ((mp.y>= foco.y) && (mp.y<=(foco.y) + (foco.h)))))&&(hs==-1)){
                                 foco=null;
                                 repaint();
@@ -306,17 +345,26 @@ class ListFrame extends JFrame {
      public void paint (Graphics g) {
         
         super.paint(g);
+        for(Button but : buts){
+            
+                but.paint(g,false);
+            
+        }
+        if(focus_but!=null){
+            focus_but.paint(g, true);
+            focus_but.Create_figurebtn(x, y);
+            figs=focus_but.add_figura_botao(figs);
+        }
+        
         for (Figure fig: figs) {
             
-                fig.paint(g);                                
+                fig.paint(g,false);                                
             
         }
         if(foco!=null){
             figs.remove(foco);
             figs.add(foco);
-            foco.paint(g);
-            auxp=foco.making_dots();
-            foco.foculisedobj(g,auxp);
+            foco.paint(g,true);
  
         }
 

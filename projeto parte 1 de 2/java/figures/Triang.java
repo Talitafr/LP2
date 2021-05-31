@@ -4,15 +4,15 @@ import java.awt.*;
 public class Triang extends Figure{
 
     private Polygon triangulo;
- public Triang(int x,int y,int w,int h,Color fundo,Color contorno){
- 		this.x=x;
- 		this.y=y;
-	 	this.w=w;
-	 	this.h=h;
-	 	this.fundo=fundo;
-	 	this.contorno=contorno;
-   
-}
+    public Triang(int x,int y,int w,int h,Color fundo,Color contorno){
+                   this.x=x;
+                   this.y=y;
+                   this.w=w;
+                   this.h=h;
+                   this.fundo=fundo;
+                   this.contorno=contorno;
+
+    }
         @Override
 	public void print() {
         System.out.format("Triângulo de tamanho (%d,%d) na posicao (%d,%d).\n",
@@ -20,7 +20,7 @@ public class Triang extends Figure{
         }
 	
         @Override
-	public void paint(Graphics g) {
+	public void paint(Graphics g, boolean focused) {
 		Graphics2D g2 = (Graphics2D) g;
                 
                 
@@ -32,6 +32,11 @@ public class Triang extends Figure{
                 g2.fillPolygon(triangulo);
 		g2.setColor(contorno);
                 g2.drawPolygon(triangulo);
+                if(focused==true){
+                    auxp=this.making_dots();
+                    this.foculisedobj(g2, auxp);
+                    
+                }
 	}
 
         @Override

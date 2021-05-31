@@ -21,7 +21,7 @@ public class Trapezio extends Figure{
                 this.w,basemenor, this.h, this.x, this.y);
         }
 	
-	public void paint(Graphics g) {
+	public void paint(Graphics g, boolean focused) {
 		Graphics2D g2 = (Graphics2D) g;
 		int[] xdir= {this.x,this.x,(this.w)+(this.x), basemenor + (this.x)};
 		int[] ydir={this.y,(this.h) + (this.y),(this.h) + (this.y),this.y};
@@ -30,6 +30,11 @@ public class Trapezio extends Figure{
 		g2.fillPolygon(trapezio);
 		g2.setColor(this.contorno);
 		g2.drawPolygon(trapezio);
+                if(focused==true){
+                    auxp=this.making_dots();
+                    this.foculisedobj(g2, auxp);
+                    
+                }
 	}
 
         public void settSize(int dx, int dy, int hs) {
