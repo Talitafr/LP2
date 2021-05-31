@@ -1,19 +1,5 @@
 
-/**
-*Tecla r - Gera um novo retângulo aleatório na posição do mouse;
-*Tecla e - Gera uma nova elipse aleatória na posição do mouse;
-*Tecla c - Gera um trapézio aleatório na posição do mouse;
-*Tecla t - Gera um triângulo aleatório na posição do mouse;
-*Tecla m - Quando a figura ta selecionada, abre a palheta de cores pra você mudar a cor de fundo;
-*Tecla l (L minusculo) - Quando a figura ta selecionada, abre a palheta de cores pra você mudar a cor de contorno;
-*Tecla Delete - Deleta a figura selecionada;
-*Tecla + do Numpad - Aumenta a dimensão da figura selecionada;
-*Tecla - do teclado principal - Diminui a dimensão da figura selecionada;
-*Setas do teclado - Move a figura;
-*Tecla TAB - Redireciona o foco para outra figura da lista de figuras;
-*Mouse pode: Movimentar a figura pelo frame, selecionar uma figura ou,
-*(se apertar em uma das teclas de Gerar figura) criar uma figura na posição do mouse.
-*/
+
  
 package lp2;
 
