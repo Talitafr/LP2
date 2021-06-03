@@ -1,4 +1,5 @@
 package lp2;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.*;
 
@@ -8,6 +9,8 @@ class RectEllipseFigApp {
         ListFrame frame = new ListFrame();       
         frame.setVisible(true);
         frame.setFocusTraversalKeysEnabled(false);
+
+        
     }
 }
 

@@ -9,22 +9,14 @@ import figures.*;
 import ivisible.Ivisivel;
 import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.*;
-import static java.awt.event.KeyEvent.*;
 import java.util.Random;
-/**
- *
- * @author talita
- */
+
+
 public class Button implements Ivisivel {
     
-    JPanel b = new JPanel();
-    Polygon Botao;
-    int idx;//index
+    Rectangle Botao;
+    public int idx;//index
     private Figure fig;
-    boolean clicado;
-    
-    ArrayList<Figure> figsb = new ArrayList<Figure>();
     Random rand = new Random();
     
     
@@ -34,17 +26,16 @@ public class Button implements Ivisivel {
         this.fig = fig;
         
     }
-
-    public ArrayList<Figure> add_figura_botao(ArrayList<Figure> figs){
-            for(Figure figb: figsb){
-                figs.add(figb);
-            }
-        
-        return figs;
+    
+    public ArrayList<Figure> limpar_tudo(ArrayList<Figure> elementos){
+        if(this.idx==5){
+            elementos.removeAll(elementos);
+        }
+        return elementos;
     }
-        
-    public void Create_figurebtn(int xf, int yf){
-        
+    
+    
+    public Figure Create_figurebtn(int xf, int yf){
         
         switch(this.idx){
         
@@ -56,9 +47,9 @@ public class Button implements Ivisivel {
 		Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
 		Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
 		Rect r = new Rect(xp,yp, w,h,fundo,contorno);                       
-		figsb.add(r);
+		
 		r.print();
-                break;
+                return r;
             }
             case 2:{
                 int xp = xf;
@@ -68,9 +59,9 @@ public class Button implements Ivisivel {
 		Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256), 255 );
 		Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
 		Ellipse e = new Ellipse(xp,yp, w,h,fundo,contorno);                        
-		figsb.add(e);
+		
 		e.print();
-                break;
+                return e;
             }
             case 3:{
                 int xp = xf;
@@ -80,9 +71,8 @@ public class Button implements Ivisivel {
                 Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
                 Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
                 Triang t = new Triang(xp,yp, w,h,fundo,contorno);                         
-                figsb.add(t);
                 t.print();
-                break;
+                return t;
             }
             case 4:{
                 int xp = xf;
@@ -92,51 +82,54 @@ public class Button implements Ivisivel {
                 Color fundo = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
                 Color contorno = new Color(rand.nextInt(256),rand.nextInt(256),rand.nextInt(256),255);
                 Trapezio c = new Trapezio(xp,yp, w,h,fundo,contorno);                       
-                figsb.add(c);
+                
                 c.print();
-                break;
+                return c;
             
             
             }
-        
-        }
-        
-        
+
+    }    
+        return null;
+       
+    
     
     }
+    
+
+
+    
     @Override
     public boolean clicked(int x, int y){
-        clicado = Botao.contains(x, y);
-        
-        return clicado;
-        
+        return Botao.contains(x, y);     
     }
 
     @Override
     public void paint(Graphics g, boolean focused) {
         Graphics2D gb = (Graphics2D) g;
-        int[] xdir= {25,75,75,25};
-        int[] ydir={ idx*50,idx*50,(idx +1)*50,(idx +1)*50};
         gb.setStroke(new BasicStroke(1.5f));
-        Botao = new Polygon(xdir,ydir,4);
+        Botao = new Rectangle(25,(this.idx)*50,50,50);
               if(focused==true){
                 gb.setColor(Color.BLUE);
-                gb.fillPolygon(Botao);
+                gb.fill(Botao);
                 gb.setColor(Color.black);
-                gb.drawPolygon(Botao);
+                gb.draw(Botao);
                 
             
-            }
+              }
               else{
                   gb.setColor(Color.LIGHT_GRAY);
-                  gb.fillPolygon(Botao);
+                  gb.fill(Botao);
                   gb.setColor(Color.black);
-                  gb.drawPolygon(Botao);
+                  gb.draw(Botao);
               
               }
         
-          
-            this.fig.paint(g, false);
+         
+            this.fig.paint(g, false);    
+          }
+      
+            
             
           
         
@@ -145,7 +138,7 @@ public class Button implements Ivisivel {
         
         
         
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+
 }
+    
+

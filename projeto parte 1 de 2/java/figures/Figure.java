@@ -3,16 +3,17 @@ import ivisible.Ivisivel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.io.Serializable;
+import javax.swing.JColorChooser;
 
 
 
 public abstract class Figure implements Ivisivel,Serializable{
-        public int x;
-      	public int y;
-      	public int w;
-      	public int h;
-        public Color fundo;
-        public Color contorno;
+        protected int x;
+      	protected int y;
+      	protected int w;
+      	protected int h;
+        protected Color fundo;
+        protected Color contorno;
 
 
        public abstract void print();
@@ -23,7 +24,11 @@ public abstract class Figure implements Ivisivel,Serializable{
     public void drag(int dx, int dy) {
         this.x = this.x + dx;
         this.y = this.y + dy;
+        if(( this.x<= 80)){
+            this.x=81;           
+        }
     }
+    
     
     public ArrayList<Rect> making_dots(){
         ArrayList<Rect> dots = new ArrayList<Rect>();
@@ -48,7 +53,17 @@ public abstract class Figure implements Ivisivel,Serializable{
         return dots;
         
     }
+    public void mudarcordefundo(){
+        JColorChooser colorChooser = new JColorChooser();
+        this.fundo = JColorChooser.showDialog(null, "Escolha uma cor para o fundo da figura", Color.black);
     
+    }
+    
+    public void mudarcordecontorno(){
+        JColorChooser colorChooser = new JColorChooser();
+        this.contorno = JColorChooser.showDialog(null, "Escolha uma cor para o contorno da figura", Color.black);
+    
+    }
 
     public void foculisedobj(Graphics g,ArrayList<Rect> dots){
         Graphics2D gdd = (Graphics2D) g;
@@ -78,4 +93,21 @@ public abstract class Figure implements Ivisivel,Serializable{
         return hs;
     }
     
+    public int get(String variavel){
+        switch(variavel){
+            case "w":{
+                return this.w;
+            }
+            case "h":{
+                return this.h;
+            }
+            case "x":{
+                return this.x;
+            }
+            case "y":{
+                return this.y;
+            }
+        }
+      return 0;  
+    }
 }
